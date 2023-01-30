@@ -3,6 +3,9 @@
 
 MovieLand is a movie search engine that allows users to search for movie titles and receive relevant information about the film, such as its release date, type, and a brief summary. The search results page displays a list of movies matching the user's query.
  
+## Demo
+https://mymovieland.netlify.app/
+
 
 
 ## Run Locally
