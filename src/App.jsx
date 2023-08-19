@@ -10,17 +10,31 @@ const API_URL = "https://www.omdbapi.com/?i=tt3896198&apikey=87f0865a";
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const searchMovies = async (title) => {
-    // const response = await fetch(`${API_URL}&s=${title}&page=${page}`);
+    if (!title) {
+      setErrorMessage("Enter a movie name!");
+      setMovies([]); // Clear movies
+      return;
+    }
+
+    setErrorMessage(""); // Clear error message
     const response = await fetch(`${API_URL}&s=${title}`);
     const data = await response.json();
-    setMovies(data.Search);
+
+    if (data.Search) {
+      setMovies(data.Search);
+    } else {
+      setMovies([]);
+      setErrorMessage("No Movie Found");
+    }
   };
 
   useEffect(() => {
     searchMovies("Movies");
   }, []);
+
   return (
     <>
       <div className="app">
@@ -42,17 +56,16 @@ const App = () => {
           />
         </div>
 
+        {/* Display error message */}
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
+
         {movies?.length > 0 ? (
           <div className="container">
             {movies.map((movie) => (
               <MovieCard movie={movie} key={movie.imdbID} />
             ))}
           </div>
-        ) : (
-          <div className="empty">
-            <h2>No Movie Found</h2>
-          </div>
-        )}
+        ) : null}
       </div>
       <Footer />
     </>

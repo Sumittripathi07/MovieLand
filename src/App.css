@@ -106,11 +106,18 @@ h1 {
   align-items: center;
 }
 
-.empty h2 {
+.error-message {
   font-size: 1.25rem;
+  font-weight: bold;
   color: #f9d3b4;
   font-family: var(--font-raleway);
 }
+
+/* .empty h2 {
+  font-size: 1.25rem;
+  color: #f9d3b4;
+  font-family: var(--font-raleway);
+} */
 
 .container {
   width: 100%;
