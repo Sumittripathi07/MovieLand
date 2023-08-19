@@ -6,7 +6,7 @@ import MovieCard from "./components/MovieCard";
 import Footer from "./components/Footer";
 
 const API_URL = "https://www.omdbapi.com/?i=tt3896198&apikey=87f0865a";
-
+let page = 1;
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -14,19 +14,18 @@ const App = () => {
 
   const searchMovies = async (title) => {
     if (!title) {
-      setErrorMessage("Enter a movie name!");
-      setMovies([]); // Clear movies
+      setErrorMessage("Please Enter a movie name!");
       return;
     }
 
     setErrorMessage(""); // Clear error message
-    const response = await fetch(`${API_URL}&s=${title}`);
+    const response = await fetch(`${API_URL}&s=${title}&page=${page}`);
     const data = await response.json();
 
     if (data.Search) {
       setMovies(data.Search);
     } else {
-      setMovies([]);
+      await setMovies([]);
       setErrorMessage("No Movie Found");
     }
   };
