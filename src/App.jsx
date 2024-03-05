@@ -5,8 +5,8 @@ import MovieImg from "./movie.svg";
 import MovieCard from "./components/MovieCard";
 import Footer from "./components/Footer";
 
-const API_URL = "https://www.omdbapi.com/?i=tt3896198&apikey=87f0865a";
-let page = 1;
+const API_URL = "https://www.omdbapi.com/?apikey=87f0865a";
+// let page = 1;
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -19,7 +19,7 @@ const App = () => {
     }
 
     setErrorMessage(""); // Clear error message
-    const response = await fetch(`${API_URL}&s=${title}&page=${page}`);
+    const response = await fetch(`${API_URL}&s=${title}&page=1`);
     const data = await response.json();
 
     if (data.Search) {
